@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "api": "apps/api",
+    "api-interfaces": "libs/api-interfaces",
+    "bb-monitor": "apps/bb-monitor",
+    "bb-monitor-e2e": "apps/bb-monitor-e2e"
+  }
+}
