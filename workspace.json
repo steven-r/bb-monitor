@@ -5,6 +5,8 @@
     "api": "apps/api",
     "api-interfaces": "libs/api-interfaces",
     "bb-monitor": "apps/bb-monitor",
-    "bb-monitor-e2e": "apps/bb-monitor-e2e"
+    "bb-monitor-e2e": "apps/bb-monitor-e2e",
+    "components": "libs/components",
+    "shared": "libs/shared"
   }
 }
