@@ -1,6 +1,10 @@
-import { cleanup, getByText, render, waitFor } from '@testing-library/react';
 import React from 'react';
+import { cleanup, getByText, render, waitFor } from '@testing-library/react';
 import App from './app';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+import ThemeProvider from "./redux/providers/theme-provider";
+import PersistProvider from "./redux/providers/persist-provider";
 
 describe('App', () => {
   afterEach(() => {
@@ -9,13 +13,19 @@ describe('App', () => {
   });
 
   it('should render successfully', async () => {
-    global['fetch'] = jest.fn().mockResolvedValueOnce({
+    global['fetch'] = jest.fn().mockResolvedValue({
       json: () => ({
         message: 'my message',
       }),
     });
 
-    const { baseElement } = render(<App />);
+    const { baseElement } = render(<Provider store={store}>
+      <PersistProvider>
+          <ThemeProvider>
+              <App />
+          </ThemeProvider>
+      </PersistProvider>
+  </Provider>);
     await waitFor(() => getByText(baseElement, 'my message'));
   });
 });

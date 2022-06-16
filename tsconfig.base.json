@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@steven-r/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@stevenr/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@stevenr/components": ["libs/components/src/index.ts"],
+      "@stevenr/shared": ["libs/shared/src/index.ts"],
+      "@stevenr/shared/*": ["libs/shared/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

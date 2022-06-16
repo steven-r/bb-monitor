@@ -12,7 +12,7 @@
         "outputPath": "dist/apps/bb-monitor",
         "index": "apps/bb-monitor/src/index.html",
         "baseHref": "/",
-        "main": "apps/bb-monitor/src/main.tsx",
+        "main": "apps/bb-monitor/src/app/index.tsx",
         "polyfills": "apps/bb-monitor/src/polyfills.ts",
         "tsConfig": "apps/bb-monitor/tsconfig.app.json",
         "assets": [
@@ -21,7 +21,7 @@
         ],
         "styles": [],
         "scripts": [],
-        "webpackConfig": "@nrwl/react/plugins/webpack"
+        "webpackConfig": "apps/bb-monitor/webpack.config.js"
       },
       "configurations": {
         "development": {
