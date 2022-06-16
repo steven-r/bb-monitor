@@ -13,7 +13,7 @@ describe('App', () => {
   });
 
   it('should render successfully', async () => {
-    global['fetch'] = jest.fn().mockResolvedValueOnce({
+    global['fetch'] = jest.fn().mockResolvedValue({
       json: () => ({
         message: 'my message',
       }),
