@@ -98,7 +98,7 @@ const ClassicPlusFileManager = lazy(
 const ClassicPlusMail = lazy(() => import('./pages/classic-plus/apps/mail'));
 
 const App: React.FC = () => {
-    return (
+  return (
       <Router>
         <Suspense fallback={<Preloader />}>
           <Routes>

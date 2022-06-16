@@ -8,4 +8,7 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/apps/bb-monitor',
+  moduleNameMapper: {
+    'react-markdown': '<rootDir>/__test__/__mocks__/react-markdown.tsx',
+  },
 };
