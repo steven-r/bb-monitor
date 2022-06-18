@@ -16,7 +16,7 @@ import uiReducer from "./slices/ui";
 import chatUISlice from "./slices/chat-ui";
 
 const persistConfig = {
-    key: "doar",
+    key: "bb-monitor",
     version: 1,
     storage,
 };
