@@ -13,9 +13,6 @@ const RowFour: FC = () => {
             <Col md={6} xl={4} mt="10px">
                 <Customers />
             </Col>
-            <Col md={6} xl={4} mt="10px">
-                <RealTimeSales />
-            </Col>
         </>
     );
 };
