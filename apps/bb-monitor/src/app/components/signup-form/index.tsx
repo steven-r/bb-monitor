@@ -141,18 +141,10 @@ const SigninForm: FC = () => {
                 </Button>
                 <StyledDivider>or</StyledDivider>
                 <Button variant="outlined" color="facebook" fullwidth>
-                    Sign In With Facebook
-                </Button>
-                <Button
-                    variant="outlined"
-                    color="twitter"
-                    mt="0.5rem"
-                    fullwidth
-                >
-                    Sign In With Twitter
+                    Sign In With GitHub
                 </Button>
                 <StyledBottomText>
-                    Don&apos;t have an account?{" "}
+                    Already have an account?{" "}
                     <Anchor path="/signin">Sign In</Anchor>
                 </StyledBottomText>
             </form>

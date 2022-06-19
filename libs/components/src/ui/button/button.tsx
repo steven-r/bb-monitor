@@ -41,6 +41,7 @@ export interface ButtonProps
         | "white"
         | "brand2"
         | "facebook"
+        | "github"
         | "twitter";
     /**
      * Optional. Default is `md`.
