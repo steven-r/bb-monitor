@@ -8,7 +8,7 @@ import MainContent from "../containers/landing-page/main";
 
 const LandingPage: React.FC = () => {
     return (
-        <Layout hideHeader={true}>
+        <Layout>
             <SEO />
             <Content borderBottomWidth="1px">
                 <PageHeader

@@ -10,20 +10,13 @@ import {
     StyledSkillNumb,
     StyledSkillLabel,
 } from "./style";
+import { IUserProps } from "../../../containers/profile-view/types/types";
 
-const UserDetails: FC = () => {
+const UserDetails: FC<IUserProps> = ({user}) => {
     return (
         <>
-            <StyledName>Fen Chiu Mao</StyledName>
-            <StyledUserName>@fenchiumao</StyledUserName>
-            <StyledBtnWrap>
-                <Button size="xs" color="white">
-                    Message
-                </Button>
-                <Button size="xs" ml="10px">
-                    Follow
-                </Button>
-            </StyledBtnWrap>
+            <StyledName>{user.displayName}</StyledName>
+            <StyledUserName>{user.email}</StyledUserName>
             <StyledDesc>
                 Redhead, Innovator, Saviour of Mankind, Hopeless Romantic,
                 Attractive 20-something Yogurt Enthusiast...{" "}

@@ -16,7 +16,7 @@ const MainContent: FC = () => {
           </Heading>
           <Text color="text3">Monitor your activities of your game.</Text>
           <Text color="text3">
-            Simple <Link to="/signup">Sign Up</Link> and copy the monitor script
+            Simple <Link to="/signup">Sign Up</Link> or <Link to="/signin">Sign In</Link> and copy the monitor script
             to your BB instance.
           </Text>
         </div>

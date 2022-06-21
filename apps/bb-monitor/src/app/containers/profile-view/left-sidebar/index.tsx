@@ -7,16 +7,17 @@ import UserWebsites from "../../../components/widgets/user-websites";
 import UserContactInfo from "../../../components/widgets/user-contact-info";
 import Explore from "../../../components/widgets/explore";
 import { StyledWrap } from "./style";
+import { IUserProps } from "../types/types";
 
-const LeftSidebar: FC = () => {
+const LeftSidebar: FC<IUserProps> = ({user}) => {
     return (
         <StyledWrap>
             <Row>
                 <Col sm={3} md={2} lg={12}>
-                    <UserAvatar />
+                    <UserAvatar user={user} />
                 </Col>
                 <Col sm={8} md={7} lg={12} mt={["20px", "0px", null, "25px"]}>
-                    <UserDetails />
+                    <UserDetails user={user}/>
                 </Col>
                 <Col sm={6} md={5} lg={12} mt="40px" mb="16px">
                     <UserSkill />

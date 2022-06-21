@@ -1,155 +1,184 @@
-import { FC } from "react";
+import { FC, useState } from 'react';
 import {
-    Label,
-    FormGroup,
-    Input,
-    Anchor,
-    Button,
-    Text,
-} from "@stevenr/components";
-import { SubmitHandler, UnpackNestedValue, useForm } from "react-hook-form";
-import { hasKey } from "@stevenr/shared/methods";
+  Label,
+  FormGroup,
+  Input,
+  Anchor,
+  Button,
+  Text,
+  Alert,
+} from '@stevenr/components';
+import { SubmitHandler, UnpackNestedValue, useForm } from 'react-hook-form';
+import { hasKey } from '@stevenr/shared/methods';
 import {
-    StyledWrap,
-    StyledTitle,
-    StyledDesc,
-    StyledDivider,
-    StyledBottomText,
-} from "./style";
+  StyledWrap,
+  StyledTitle,
+  StyledDesc,
+  StyledDivider,
+  StyledBottomText,
+} from './style';
+import { CreateUserCredentials, useFirebase, UserProfile } from 'react-redux-firebase';
+import AuthIsLoaded from '../auth/AuthIsLoaded/main';
+import { Navigate } from 'react-router-dom';
 
 interface IFormValues {
-    email: string;
-    password: string;
-    first_name: string;
-    last_name: string;
+  email: string;
+  password: string;
+  first_name: string;
+  last_name: string;
 }
 
 const SigninForm: FC = () => {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<IFormValues>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IFormValues>();
+  const [error, setError] = useState<string>();
+  const firebase = useFirebase();
+  const user = firebase.auth().currentUser;
 
-    const onSubmit = (data: IFormValues): void => {
-        alert(JSON.stringify(data, null));
-    };
+  const onSubmit = async (data: IFormValues): Promise<UserProfile> => {
+    try {
+      return await firebase.auth().createUserWithEmailAndPassword(data.email, data.password);
+    } catch (err) {
+      console.log('Error during login');
+      console.log(err);
+      setError('We cannot log in you into github');
+    }
+    return Promise.reject();
+  };    
 
-    return (
-        <StyledWrap>
-            <StyledTitle>Create New Account</StyledTitle>
-            <StyledDesc>
-                It&apos;s free to signup and only takes a minute.
-            </StyledDesc>
-            <form action="#" onSubmit={handleSubmit(onSubmit)} noValidate>
-                <FormGroup mb="20px">
-                    <Label display="block" mb="5px" htmlFor="email">
-                        Email address
-                    </Label>
-                    <Input
-                        id="email"
-                        type="email"
-                        placeholder="Enter your email address"
-                        feedbackText={errors?.email?.message}
-                        state={hasKey(errors, "email") ? "error" : "success"}
-                        showState={!!hasKey(errors, "email")}
-                        {...register("email", {
-                            required: "Email is required",
-                            pattern: {
-                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                                message: "invalid email address",
-                            },
-                        })}
-                    />
-                </FormGroup>
-                <FormGroup mb="20px">
-                    <Label display="block" mb="5px" htmlFor="password">
-                        Password
-                    </Label>
-                    <Input
-                        id="password"
-                        type="password"
-                        placeholder="Enter your password"
-                        feedbackText={errors?.password?.message}
-                        state={hasKey(errors, "password") ? "error" : "success"}
-                        showState={!!hasKey(errors, "password")}
-                        {...register("password", {
-                            required: "Password is required",
-                            minLength: {
-                                value: 6,
-                                message: "Minimum length is 6",
-                            },
-                            maxLength: {
-                                value: 10,
-                                message: "Minimum length is 10",
-                            },
-                        })}
-                    />
-                </FormGroup>
-                <FormGroup mb="20px">
-                    <Label display="block" mb="5px" htmlFor="first_name">
-                        Firstname
-                    </Label>
-                    <Input
-                        id="first_name"
-                        type="text"
-                        placeholder="Enter your firstname"
-                        feedbackText={errors?.first_name?.message}
-                        state={
-                            hasKey(errors, "first_name") ? "error" : "success"
-                        }
-                        showState={!!hasKey(errors, "first_name")}
-                        {...register("first_name", {
-                            required: "First Name is required",
-                            minLength: {
-                                value: 2,
-                                message: "Minimum length is 2",
-                            },
-                        })}
-                    />
-                </FormGroup>
-                <FormGroup mb="20px">
-                    <Label display="block" mb="5px" htmlFor="last_name">
-                        Lastname
-                    </Label>
-                    <Input
-                        id="last_name"
-                        type="text"
-                        placeholder="Enter your Lastname"
-                        feedbackText={errors?.last_name?.message}
-                        state={
-                            hasKey(errors, "last_name") ? "error" : "success"
-                        }
-                        showState={!!hasKey(errors, "last_name")}
-                        {...register("last_name", {
-                            required: "Last Name is required",
-                            minLength: {
-                                value: 2,
-                                message: "Minimum length is 2",
-                            },
-                        })}
-                    />
-                </FormGroup>
-                <FormGroup mb="20px">
-                    <Text fontSize="12px">
-                        By clicking <strong>Create an account</strong> below,
-                        you agree to our terms of service and privacy statement.
-                    </Text>
-                </FormGroup>
-                <Button type="submit" color="brand2" fullwidth>
-                    Sign In
-                </Button>
-                <StyledDivider>or</StyledDivider>
-                <Button variant="outlined" color="facebook" fullwidth>
-                    Sign In With GitHub
-                </Button>
-                <StyledBottomText>
-                    Already have an account?{" "}
-                    <Anchor path="/signin">Sign In</Anchor>
-                </StyledBottomText>
-            </form>
-        </StyledWrap>
-    );
+  const submitGithub = async () => {
+    try {
+      return await firebase.login({ provider: 'github', type: 'popup' });
+    } catch (err) {
+      console.log('Error during login');
+      console.log(err);
+      setError('We cannot log in you into github');
+    }
+    return false;
+  };
+  if (user && !user.isAnonymous) return <Navigate to="/app" replace />;
+
+  return (
+    <AuthIsLoaded>
+      {error && <Alert color="danger">{error}</Alert>}
+      <StyledWrap>
+        <StyledTitle>Create New Account</StyledTitle>
+        <StyledDesc>
+          It&apos;s free to signup and only takes a minute.
+        </StyledDesc>
+        <form action="#" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <FormGroup mb="20px">
+            <Label display="block" mb="5px" htmlFor="email">
+              Email address
+            </Label>
+            <Input
+              id="email"
+              type="email"
+              placeholder="Enter your email address"
+              feedbackText={errors?.email?.message}
+              state={hasKey(errors, 'email') ? 'error' : 'success'}
+              showState={!!hasKey(errors, 'email')}
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                  message: 'invalid email address',
+                },
+              })}
+            />
+          </FormGroup>
+          <FormGroup mb="20px">
+            <Label display="block" mb="5px" htmlFor="password">
+              Password
+            </Label>
+            <Input
+              id="password"
+              type="password"
+              placeholder="Enter your password"
+              feedbackText={errors?.password?.message}
+              state={hasKey(errors, 'password') ? 'error' : 'success'}
+              showState={!!hasKey(errors, 'password')}
+              {...register('password', {
+                required: 'Password is required',
+                minLength: {
+                  value: 6,
+                  message: 'Minimum length is 6',
+                },
+                maxLength: {
+                  value: 10,
+                  message: 'Minimum length is 10',
+                },
+              })}
+            />
+          </FormGroup>
+          <FormGroup mb="20px">
+            <Label display="block" mb="5px" htmlFor="first_name">
+              Firstname
+            </Label>
+            <Input
+              id="first_name"
+              type="text"
+              placeholder="Enter your firstname"
+              feedbackText={errors?.first_name?.message}
+              state={hasKey(errors, 'first_name') ? 'error' : 'success'}
+              showState={!!hasKey(errors, 'first_name')}
+              {...register('first_name', {
+                required: 'First Name is required',
+                minLength: {
+                  value: 2,
+                  message: 'Minimum length is 2',
+                },
+              })}
+            />
+          </FormGroup>
+          <FormGroup mb="20px">
+            <Label display="block" mb="5px" htmlFor="last_name">
+              Lastname
+            </Label>
+            <Input
+              id="last_name"
+              type="text"
+              placeholder="Enter your Lastname"
+              feedbackText={errors?.last_name?.message}
+              state={hasKey(errors, 'last_name') ? 'error' : 'success'}
+              showState={!!hasKey(errors, 'last_name')}
+              {...register('last_name', {
+                required: 'Last Name is required',
+                minLength: {
+                  value: 2,
+                  message: 'Minimum length is 2',
+                },
+              })}
+            />
+          </FormGroup>
+          <FormGroup mb="20px">
+            <Text fontSize="12px">
+              By clicking <strong>Create an account</strong> below, you agree to
+              our terms of service and privacy statement.
+            </Text>
+          </FormGroup>
+          <Button type="submit" color="brand2" fullwidth>
+            Sign Up
+          </Button>
+          <StyledDivider>or</StyledDivider>
+          <Button
+            variant="outlined"
+            color="github"
+            fullwidth
+            onClick={submitGithub}
+          >
+            Sign In With GitHub
+          </Button>
+          <StyledBottomText>
+            Already have an account? <Anchor path="/signin">Sign In</Anchor>
+          </StyledBottomText>
+        </form>
+      </StyledWrap>
+    </AuthIsLoaded>
+  );
 };
 
 export default SigninForm;

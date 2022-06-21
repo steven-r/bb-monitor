@@ -21,26 +21,38 @@ import {
     StyledDivider,
     StyledAvatar,
 } from "./style";
+import { useFirebase } from "react-redux-firebase";
+import { User as FirebaseUser } from "@firebase/auth-types";
 
 const ProfileDropdown: React.FC = () => {
+    const fb = useFirebase();
+    const user = fb.auth().currentUser;
+    const signout = () => {
+        return fb.logout();
+    };
+
     return (
         <Dropdown direction="down" className="dropdown-profile">
             <DropdownToggle variant="texted">
                 <StyledAvatar size="sm" shape="circle">
-                    <AvatarInitial>df</AvatarInitial>
+                    {user?.photoURL && <Avatar><img src={user.photoURL} alt={user?.displayName || ""}/></Avatar>}
+                    {!user?.photoURL && 
+                    <AvatarInitial>{user ? buildInitials(user) : "??"}</AvatarInitial>}
                 </StyledAvatar>
             </DropdownToggle>
             <StyledDropMenu>
                 <Avatar size="lg" shape="circle">
-                    <AvatarInitial>df</AvatarInitial>
+                {user?.photoURL && <Avatar><img src={user.photoURL} alt={user?.displayName || ""}/></Avatar>}
+                    {!user?.photoURL && 
+                    <AvatarInitial>{user ? buildInitials(user) : "??"}</AvatarInitial>}
                 </Avatar>
-                <StyledAuthorName>Katherine Pechon</StyledAuthorName>
-                <StyledAuthorRole>Administrator</StyledAuthorRole>
-                <StyledDropItem path="/profile-view">
+                <StyledAuthorName>{user?.displayName}</StyledAuthorName>
+                <StyledAuthorRole>{user?.email}</StyledAuthorRole>
+                <StyledDropItem path="/app/profile-view">
                     <Edit3 size="24" />
                     Edit Profile
                 </StyledDropItem>
-                <StyledDropItem path="/profile-view" mt="10px">
+                <StyledDropItem path="/app/profile-view" mt="10px">
                     <User size="24" />
                     View Profile
                 </StyledDropItem>
@@ -64,7 +76,7 @@ const ProfileDropdown: React.FC = () => {
                     <Settings size="24" />
                     Privacy Settings
                 </StyledDropItem>
-                <StyledDropItem path="/signin" mt="10px">
+                <StyledDropItem onClick={signout} path="#" mt="10px">
                     <LogOut size="24" />
                     Sign Out
                 </StyledDropItem>
@@ -74,3 +86,7 @@ const ProfileDropdown: React.FC = () => {
 };
 
 export default ProfileDropdown;
+function buildInitials(user: FirebaseUser) {
+    return user.displayName?.split(' ').filter(s => s.substring(0, 1)).join();
+}
+
