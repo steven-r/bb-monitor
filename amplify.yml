@@ -10,9 +10,9 @@ applications:
           commands: 
             - npm run build
       artifacts:
-        baseDirectory: dist/apps/bb-monitor
+        baseDirectory: ../../dist/apps/bb-monitor
         files:
           - '**/*'
       cache:
         paths:
-          - node_modules/**/*
+          - ../../node_modules/**/*

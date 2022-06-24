@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "nx": "nx",
     "start": "node dist/apps/api/main.js",
     "build": "nx run-many --target=build --projects=bb-monitor,api --parallel",
     "test": "nx test",
