@@ -1,4 +1,5 @@
 import { Message } from "@stevenr/api-interfaces";
+import { environment } from "../../../environments/environment";
 import React, { useEffect, useState } from "react";
 import { Heart } from "react-feather";
 import {
@@ -13,7 +14,7 @@ const Footer: React.FC = () => {
     const [m, setMessage] = useState<Message>({ message: '' });
 
     useEffect(() => {
-      fetch('/api')
+      fetch(environment.apiAddress)
         .then((r) => r.json())
         .then(setMessage);
     }, []);

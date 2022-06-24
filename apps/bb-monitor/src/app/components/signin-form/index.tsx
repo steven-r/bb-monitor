@@ -5,7 +5,6 @@ import {
   Input,
   Anchor,
   Button,
-  Alert,
 } from '@stevenr/components';
 import { useForm } from 'react-hook-form';
 import { hasKey } from '@stevenr/shared/methods';
@@ -17,11 +16,6 @@ import {
   StyledDivider,
   StyledBottomText,
 } from './style';
-import { FirebaseReducer, useFirebase } from 'react-redux-firebase';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
-import AuthIsLoaded from '../auth/AuthIsLoaded/main';
-import { Navigate } from 'react-router-dom';
 
 interface IFormValues {
   email: string;
@@ -34,32 +28,10 @@ const SigninForm: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormValues>();
-  const [error, setError] = useState<string>();
-  const firebase = useFirebase();
-  const user = firebase.auth().currentUser;
-  const loginGithub = async () => {
-    try {
-          return await firebase
-              .login({ provider: 'github', type: 'popup' });
-      } catch (err) {
-          console.log('Error during login');
-          console.log(err);
-          setError('We cannot log in you into github');
-      }
-      return;
-  };
   const onSubmit = (data: IFormValues) => {
-    firebase.auth().signInWithEmailAndPassword(data.email, data.password)
-    .catch((err) => {
-        console.log('Error during login');
-        console.log(err.message);
-        setError(err.message);
-      });
+    return false;
   };
-  if (user && !user.isAnonymous) return <Navigate to="/app" replace />;
   return (
-    <AuthIsLoaded>
-      {error && <Alert color="danger">{error}</Alert>}
       <StyledWrap>
         <StyledTitle>Sign In</StyledTitle>
         <StyledDesc>Welcome back! Please signin to continue.</StyledDesc>
@@ -121,7 +93,6 @@ const SigninForm: FC = () => {
             variant="outlined"
             color="github"
             fullwidth
-            onClick={loginGithub}
           >
             Sign In With Github
           </Button>
@@ -131,7 +102,6 @@ const SigninForm: FC = () => {
           </StyledBottomText>
         </form>
       </StyledWrap>
-    </AuthIsLoaded>
   );
 };
 

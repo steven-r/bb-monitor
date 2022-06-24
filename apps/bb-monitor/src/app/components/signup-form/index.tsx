@@ -6,9 +6,8 @@ import {
   Anchor,
   Button,
   Text,
-  Alert,
 } from '@stevenr/components';
-import { SubmitHandler, UnpackNestedValue, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { hasKey } from '@stevenr/shared/methods';
 import {
   StyledWrap,
@@ -17,9 +16,6 @@ import {
   StyledDivider,
   StyledBottomText,
 } from './style';
-import { CreateUserCredentials, useFirebase, UserProfile } from 'react-redux-firebase';
-import AuthIsLoaded from '../auth/AuthIsLoaded/main';
-import { Navigate } from 'react-router-dom';
 
 interface IFormValues {
   email: string;
@@ -34,36 +30,10 @@ const SigninForm: FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IFormValues>();
-  const [error, setError] = useState<string>();
-  const firebase = useFirebase();
-  const user = firebase.auth().currentUser;
 
-  const onSubmit = async (data: IFormValues): Promise<UserProfile> => {
-    try {
-      return await firebase.auth().createUserWithEmailAndPassword(data.email, data.password);
-    } catch (err) {
-      console.log('Error during login');
-      console.log(err);
-      setError('We cannot log in you into github');
-    }
-    return Promise.reject();
-  };    
-
-  const submitGithub = async () => {
-    try {
-      return await firebase.login({ provider: 'github', type: 'popup' });
-    } catch (err) {
-      console.log('Error during login');
-      console.log(err);
-      setError('We cannot log in you into github');
-    }
-    return false;
-  };
-  if (user && !user.isAnonymous) return <Navigate to="/app" replace />;
+  const onSubmit = () => {return false};
 
   return (
-    <AuthIsLoaded>
-      {error && <Alert color="danger">{error}</Alert>}
       <StyledWrap>
         <StyledTitle>Create New Account</StyledTitle>
         <StyledDesc>
@@ -168,7 +138,6 @@ const SigninForm: FC = () => {
             variant="outlined"
             color="github"
             fullwidth
-            onClick={submitGithub}
           >
             Sign In With GitHub
           </Button>
@@ -177,7 +146,6 @@ const SigninForm: FC = () => {
           </StyledBottomText>
         </form>
       </StyledWrap>
-    </AuthIsLoaded>
   );
 };
 

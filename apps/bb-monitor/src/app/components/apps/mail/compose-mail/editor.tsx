@@ -1,95 +1,99 @@
-import { Component } from "react";
-import { Button } from "@stevenr/components";
-import ReactQuill from "react-quill";
+import { Component } from 'react';
+import { Button } from '@stevenr/components';
+import MDEditor from '@uiw/react-md-editor';
 import {
-    StyledWrap,
-    StyledToolbarWrap,
-    StyledToolbar,
-    StyledBtnWrap,
-} from "./style";
+  StyledWrap,
+  StyledToolbarWrap,
+  StyledToolbar,
+  StyledBtnWrap,
+} from './style';
 
 const CustomToolbar = () => (
-    <StyledToolbarWrap>
-        <StyledToolbar id="toolbar2">
-            <span className="ql-formats">
-                <button type="button" className="ql-bold" />
-                <button type="button" className="ql-italic" />
-                <button type="button" className="ql-underline" />
-            </span>
-            <span className="ql-formats">
-                <button type="button" className="ql-link" />
-                <button type="button" className="ql-image" />
-            </span>
-        </StyledToolbar>
-        <StyledBtnWrap>
-            <Button color="white" mr="5px">
-                Save as Draft
-            </Button>
-            <Button>Reply</Button>
-        </StyledBtnWrap>
-    </StyledToolbarWrap>
+  <StyledToolbarWrap>
+    <StyledToolbar id="toolbar2">
+      <span className="ql-formats">
+        <button type="button" className="ql-bold" />
+        <button type="button" className="ql-italic" />
+        <button type="button" className="ql-underline" />
+      </span>
+      <span className="ql-formats">
+        <button type="button" className="ql-link" />
+        <button type="button" className="ql-image" />
+      </span>
+    </StyledToolbar>
+    <StyledBtnWrap>
+      <Button color="white" mr="5px">
+        Save as Draft
+      </Button>
+      <Button>Reply</Button>
+    </StyledBtnWrap>
+  </StyledToolbarWrap>
 );
 
 interface IProps {
-    placeholder: string;
+  placeholder: string;
 }
 
 interface IState {
-    editorHtml: string;
+  editorHtml: string;
 }
 
 class Editor extends Component<IProps, IState> {
-    static modules = {
-        toolbar: {
-            container: "#toolbar2",
-        },
+  static modules = {
+    toolbar: {
+      container: '#toolbar2',
+    },
+  };
+
+  static formats = [
+    'header',
+    'font',
+    'size',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+    'image',
+    'color',
+  ];
+
+  constructor(props: IProps) {
+    super(props);
+    this.state = {
+      editorHtml: '',
     };
+  }
 
-    static formats = [
-        "header",
-        "font",
-        "size",
-        "bold",
-        "italic",
-        "underline",
-        "strike",
-        "blockquote",
-        "list",
-        "bullet",
-        "indent",
-        "link",
-        "image",
-        "color",
-    ];
-
-    constructor(props: IProps) {
-        super(props);
-        this.state = {
-            editorHtml: "",
-        };
+  handleChange = (value: string | undefined): void => {
+    if (value) {
+      this.setState({ editorHtml: value });
     }
+  };
 
-    handleChange = (html: string): void => {
-        this.setState({ editorHtml: html });
-    };
-
-    override render(): JSX.Element {
-        const { editorHtml } = this.state;
-        const { placeholder } = this.props;
-        const { modules, formats } = Editor;
-        return (
-            <StyledWrap>
-                <ReactQuill
-                    value={editorHtml}
-                    onChange={this.handleChange}
-                    placeholder={placeholder}
-                    modules={modules}
-                    formats={formats}
-                />
-                <CustomToolbar />
-            </StyledWrap>
-        );
-    }
+  override render(): JSX.Element {
+    const { editorHtml } = this.state;
+    const { placeholder } = this.props;
+    const { modules, formats } = Editor;
+    return (
+      <StyledWrap>
+        <MDEditor
+          value={editorHtml}
+          placeholder={placeholder}
+          onChange={this.handleChange}
+        />
+        <MDEditor.Markdown
+          source={editorHtml}
+          style={{ whiteSpace: 'pre-wrap' }}
+        />
+        <CustomToolbar />
+      </StyledWrap>
+    );
+  }
 }
 
 export default Editor;

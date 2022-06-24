@@ -1,11 +1,8 @@
 import React, { Suspense, lazy } from 'react';
 import { useSelector } from 'react-redux';
-import { FirebaseReducer, isEmpty } from 'react-redux-firebase';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import RequireAuth from './components/auth/PrivateRoute';
 import Preloader from './components/preloader';
 import LandingPage from './pages/landing-page';
-import { RootState } from './redux/store';
 
 // Classic Pages
 
@@ -25,11 +22,6 @@ const ShowLicensePage = lazy(() => import('./pages/show-license'));
 const ShowChangelogPage = lazy(() => import('./pages/show-changelog'));
 
 const App: React.FC = () => {
-  const auth = useSelector<RootState, FirebaseReducer.AuthState>(
-    (state) => state.firebase.auth,
-    (a, b) => a.isLoaded === b.isLoaded && a.isEmpty === b.isEmpty
-  );
-
   return (
     <BrowserRouter>
       <Suspense fallback={<Preloader />}>
@@ -38,36 +30,26 @@ const App: React.FC = () => {
           <Route
             path="/"
             element={
-              isEmpty(auth) || auth.isAnonymous ? (
                 <LandingPage />
-              ) : (
-                <Navigate to="/app" replace />
-              )
             }
           />
           <Route
             path="app"
             element={
-              <RequireAuth>
                 <DashboardOne />
-              </RequireAuth>
             }
           ></Route>
           <Route
             path="profile-view"
             element={
-              <RequireAuth>
                 <ProfileView />
-              </RequireAuth>
             }
           />
           {/* User Routes */}
           <Route
             path="connections"
             element={
-              <RequireAuth>
                 <Connections />
-              </RequireAuth>
             }
           />
 
@@ -75,9 +57,7 @@ const App: React.FC = () => {
           <Route
             path="timeline"
             element={
-              <RequireAuth>
                 <Timeline />
-              </RequireAuth>
             }
           />
 

@@ -16,8 +16,8 @@ import eventReducer, { EvenState } from './slices/event';
 import uiReducer, { UIState } from './slices/ui';
 import chatUISlice from './slices/chat-ui';
 import { UIState as ChatUIState } from './slices/chat-ui';
-import { actionTypes, firebaseReducer, FirebaseReducer } from 'react-redux-firebase';
 import { firestoreReducer, FirestoreReducer } from 'redux-firestore';
+import { actionTypes, firebaseReducer, FirebaseReducer } from "react-redux-firebase";
 
 // Optional: If you use the user profile option
 interface Profile {

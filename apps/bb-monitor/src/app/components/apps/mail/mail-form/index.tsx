@@ -1,6 +1,5 @@
 import { Component } from "react";
 import { Button } from "@stevenr/components";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { StyledWrap, StyledToolbarWrap, StyledToolbar } from "./style";
 
@@ -71,13 +70,6 @@ class MailForm extends Component<IProps, IState> {
         const { modules, formats } = MailForm;
         return (
             <StyledWrap>
-                <ReactQuill
-                    value={editorHtml}
-                    onChange={this.handleChange}
-                    placeholder={placeholder}
-                    modules={modules}
-                    formats={formats}
-                />
                 <CustomToolbar />
             </StyledWrap>
         );
