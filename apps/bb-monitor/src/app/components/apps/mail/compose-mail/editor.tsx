@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { Button } from '@stevenr/components';
-import MDEditor from '@uiw/react-md-editor';
 import {
   StyledWrap,
   StyledToolbarWrap,
@@ -81,15 +80,6 @@ class Editor extends Component<IProps, IState> {
     const { modules, formats } = Editor;
     return (
       <StyledWrap>
-        <MDEditor
-          value={editorHtml}
-          placeholder={placeholder}
-          onChange={this.handleChange}
-        />
-        <MDEditor.Markdown
-          source={editorHtml}
-          style={{ whiteSpace: 'pre-wrap' }}
-        />
         <CustomToolbar />
       </StyledWrap>
     );

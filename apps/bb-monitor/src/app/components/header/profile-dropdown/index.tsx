@@ -75,6 +75,5 @@ const ProfileDropdown: React.FC = () => {
 
 export default ProfileDropdown;
 function buildInitials(user: any) {
-    return user.displayName?.split(' ').filter(s => s.substring(0, 1)).join();
+    return user.displayName?.split(' ').filter((s: string) => s.substring(0, 1)).join();
 }
-
