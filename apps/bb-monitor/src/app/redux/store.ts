@@ -1,56 +1,57 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 
 import {
-    persistStore,
-    persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
-} from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import eventReducer from "./slices/event";
-import uiReducer from "./slices/ui";
-import chatUISlice from "./slices/chat-ui";
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import eventReducer, { EvenState } from './slices/event';
+import uiReducer, { UIState } from './slices/ui';
+import chatUISlice from './slices/chat-ui';
+import { UIState as ChatUIState } from './slices/chat-ui';
+
 
 const persistConfig = {
-    key: "bb-monitor",
-    version: 1,
-    storage,
+  key: 'bb-monitor',
+  version: 1,
+  storage,
+  debug: true,
 };
 
-export const rootReducer = combineReducers({
-    events: eventReducer,
-    ui: uiReducer,
-    chatUI: chatUISlice,
+export interface RootState {
+    events: EvenState,
+    ui: UIState,
+    chatUI: ChatUIState,
+}
+
+export const rootReducer = combineReducers<RootState>({
+  events: eventReducer,
+  ui: uiReducer,
+  chatUI: chatUISlice,
 });
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // export const store = configureStore({
 //     reducer: rootReducer,
 // });
 export const store = configureStore({
-    reducer: persistedReducer,
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [
-                    FLUSH,
-                    REHYDRATE,
-                    PAUSE,
-                    PERSIST,
-                    PURGE,
-                    REGISTER,
-                ],
-            },
-        }),
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 export const persistor = persistStore(store);
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;

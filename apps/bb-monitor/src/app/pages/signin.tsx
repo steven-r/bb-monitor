@@ -6,7 +6,7 @@ import SEO from "../components/seo";
 
 const SignIn: React.FC = () => {
     return (
-        <Layout>
+        <Layout hideHeader={true}>
             <SEO />
             <Content fullHeight>
                 <AuthContainer />

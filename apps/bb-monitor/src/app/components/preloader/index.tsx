@@ -2,12 +2,13 @@ import { FC, useEffect, useState } from "react";
 import { Spinner } from "@stevenr/components";
 import { StyledLoader } from "./style";
 import { Message } from "@stevenr/api-interfaces";
+import { environment } from "../../../environments/environment";
 
 const Preloader: FC = () => {
     const [m, setMessage] = useState<Message>({ message: '' });
 
     useEffect(() => {
-      fetch('/api')
+      fetch(environment.apiAddress)
         .then((r) => r.json())
         .then(setMessage);
     }, []);

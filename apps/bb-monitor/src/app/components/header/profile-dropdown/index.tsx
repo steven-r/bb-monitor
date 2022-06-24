@@ -27,20 +27,20 @@ const ProfileDropdown: React.FC = () => {
         <Dropdown direction="down" className="dropdown-profile">
             <DropdownToggle variant="texted">
                 <StyledAvatar size="sm" shape="circle">
-                    <AvatarInitial>df</AvatarInitial>
+                    <AvatarInitial>SR</AvatarInitial>
                 </StyledAvatar>
             </DropdownToggle>
             <StyledDropMenu>
                 <Avatar size="lg" shape="circle">
-                    <AvatarInitial>df</AvatarInitial>
+                    <AvatarInitial>SR</AvatarInitial>
                 </Avatar>
-                <StyledAuthorName>Katherine Pechon</StyledAuthorName>
-                <StyledAuthorRole>Administrator</StyledAuthorRole>
-                <StyledDropItem path="/profile-view">
+                <StyledAuthorName>Me</StyledAuthorName>
+                <StyledAuthorRole>@You</StyledAuthorRole>
+                <StyledDropItem path="/app/profile-view">
                     <Edit3 size="24" />
                     Edit Profile
                 </StyledDropItem>
-                <StyledDropItem path="/profile-view" mt="10px">
+                <StyledDropItem path="/app/profile-view" mt="10px">
                     <User size="24" />
                     View Profile
                 </StyledDropItem>
@@ -64,7 +64,7 @@ const ProfileDropdown: React.FC = () => {
                     <Settings size="24" />
                     Privacy Settings
                 </StyledDropItem>
-                <StyledDropItem path="/signin" mt="10px">
+                <StyledDropItem path="#" mt="10px">
                     <LogOut size="24" />
                     Sign Out
                 </StyledDropItem>
@@ -74,3 +74,6 @@ const ProfileDropdown: React.FC = () => {
 };
 
 export default ProfileDropdown;
+function buildInitials(user: any) {
+    return user.displayName?.split(' ').filter((s: string) => s.substring(0, 1)).join();
+}

@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "nx": "nx",
     "start": "node dist/apps/api/main.js",
     "build": "nx run-many --target=build --projects=bb-monitor,api --parallel",
     "test": "nx test",
@@ -39,7 +40,6 @@
     "react-markdown": "^8.0.3",
     "react-perfect-scrollbar": "^1.5.8",
     "react-portal": "^4.2.2",
-    "react-quill": "^1.3.5",
     "react-redux": "^8.0.2",
     "react-router-dom": "6.3.0",
     "react-sparklines": "^1.7.0",

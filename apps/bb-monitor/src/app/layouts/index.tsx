@@ -5,6 +5,7 @@ import Footer from "./footer";
 interface IProps {
     hasSidebar?: boolean;
     hideFooter?: boolean;
+    hideHeader?: boolean;
     sidebarLayout?: 1 | 2;
 }
 
@@ -12,11 +13,12 @@ const Layout: React.FC<PropsWithChildren<IProps>> = ({
     children,
     hasSidebar,
     hideFooter,
+    hideHeader,
     sidebarLayout,
 }) => {
     return (
         <>
-            <Header hasSidebar={hasSidebar} sidebarLayout={sidebarLayout} />
+            {!hideHeader && <Header hasSidebar={hasSidebar} sidebarLayout={sidebarLayout} />}
             {children}
             {!hideFooter && <Footer />}
         </>
@@ -25,6 +27,7 @@ const Layout: React.FC<PropsWithChildren<IProps>> = ({
 
 Layout.defaultProps = {
     hideFooter: false,
+    hideHeader: false
 };
 
 export default Layout;

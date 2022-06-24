@@ -1,37 +1,32 @@
-import { FC } from "react";
-import loginImage from "@stevenr/shared/images/img15.png";
-import SigninForm from "../../components/signin-form";
+import { FC } from 'react';
+import loginImage from '@stevenr/shared/images/signinon.jpg';
+import SigninForm from '../../components/signin-form';
 import {
-    StyledMedia,
-    StyledMediaBody,
-    StyledImage,
-    StyledImgText,
-    StyledSignin,
-} from "./style";
+  StyledMedia,
+  StyledMediaBody,
+  StyledImage,
+  StyledImgText,
+  StyledSignin,
+} from './style';
 
 const AuthContainer: FC = () => {
-    return (
-        <StyledMedia>
-            <StyledMediaBody>
-                <StyledImage>
-                    <img src={loginImage} alt="Login" />
-                </StyledImage>
-                <StyledImgText>
-                    Workspace design vector is created by{" "}
-                    <a
-                        href="https://www.freepik.com/pikisuperstar"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        pikisuperstar (freepik.com)
-                    </a>
-                </StyledImgText>
-            </StyledMediaBody>
-            <StyledSignin>
-                <SigninForm />
-            </StyledSignin>
-        </StyledMedia>
-    );
+  return (
+    <StyledMedia>
+      <StyledMediaBody>
+        <StyledImage>
+          <img src={loginImage} alt="Login" />
+        </StyledImage>
+        <StyledImgText>
+          <a href="https://www.freepik.com/photos/password-security">
+            Password security photo created by freepik - www.freepik.com
+          </a>
+        </StyledImgText>
+      </StyledMediaBody>
+      <StyledSignin>
+        <SigninForm />
+      </StyledSignin>
+    </StyledMedia>
+  );
 };
 
 export default AuthContainer;

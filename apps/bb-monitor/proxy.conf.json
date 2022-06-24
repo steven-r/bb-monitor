@@ -1,6 +1,7 @@
 {
-  "/api": {
+  "https://bb-monitor-api.web.app/api": {
     "target": "http://localhost:3333",
-    "secure": false
+    "secure": false,
+    "changeOrigin": true
   }
 }
