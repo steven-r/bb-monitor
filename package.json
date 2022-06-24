@@ -5,8 +5,8 @@
   "scripts": {
     "nx": "nx",
     "start": "node dist/apps/api/main.js",
-    "build": "nx run-many --target=build --projects=bb-monitor,api --parallel",
-    "test": "nx test",
+    "build": "npm run nx build",
+    "test": "npm run nx test",
     "prepare": "husky install"
   },
   "private": true,
