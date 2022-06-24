@@ -8,7 +8,7 @@ applications:
             - yarn install
         build:
           commands: 
-            - yarn build
+            - yarn nx build bb-monitor
       artifacts:
         baseDirectory: ../../dist/apps/bb-monitor
         files:
