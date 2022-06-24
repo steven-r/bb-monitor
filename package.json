@@ -5,8 +5,8 @@
   "scripts": {
     "nx": "nx",
     "start": "node dist/apps/api/main.js",
-    "build": "npm run nx build",
-    "test": "npm run nx test",
+    "build": "nx build",
+    "test": "nx test",
     "prepare": "husky install"
   },
   "private": true,

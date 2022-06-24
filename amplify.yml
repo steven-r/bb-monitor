@@ -5,10 +5,10 @@ applications:
       phases:
         prebuild:
           commands:
-            - npm ci
+            - yarn install
         build:
           commands: 
-            - npm run build
+            - yarn build
       artifacts:
         baseDirectory: ../../dist/apps/bb-monitor
         files:
