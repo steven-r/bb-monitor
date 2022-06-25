@@ -5,12 +5,13 @@ applications:
       phases:
         prebuild:
           commands:
+            - cd ../..
             - npm install -g nx
             - npm install
         build:
           commands: 
             - npm install -g nx
-            - npm run build
+            - nx build bb-monitor --prod
       artifacts:
         baseDirectory: ../../dist/apps/bb-monitor
         files:
