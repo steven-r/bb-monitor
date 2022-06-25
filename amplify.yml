@@ -7,7 +7,7 @@ applications:
           commands:
             - cd ../..
             - nvm install 16
-            - npm install -g nx
+            - npm install --location=global nx
             - npm install
             - npm run build
       artifacts:
