@@ -6,11 +6,11 @@ applications:
         prebuild:
           commands:
             - cd ../..
+            - nvm install 16
             - npm install -g nx
             - npm install
         build:
           commands: 
-            - npm install -g nx
             - nx build bb-monitor --prod
       artifacts:
         baseDirectory: ../../dist/apps/bb-monitor
