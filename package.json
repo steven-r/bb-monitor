@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "nx": "nx",
     "start": "node dist/apps/api/main.js",
     "build": "nx build",
     "test": "nx test",
@@ -11,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+    "@aws-amplify/cli": "^9.0.0",
     "@fullcalendar/daygrid": "^5.11.0",
     "@fullcalendar/interaction": "^5.11.0",
     "@fullcalendar/list": "^5.11.0",

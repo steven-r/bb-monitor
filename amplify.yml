@@ -5,6 +5,7 @@ applications:
       phases:
         prebuild:
           commands:
+            - npm install -g nx
             - yarn install
         build:
           commands: 
