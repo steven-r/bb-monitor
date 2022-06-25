@@ -20,6 +20,7 @@ const Connections = lazy(() => import('./pages/connections'));
 const Timeline = lazy(() => import('./pages/timeline'));
 const ShowLicensePage = lazy(() => import('./pages/show-license'));
 const ShowChangelogPage = lazy(() => import('./pages/show-changelog'));
+const PrivacyPolicy = lazy(() => import('./pages/privacy-policy'));
 
 const App: React.FC = () => {
   return (
@@ -74,6 +75,7 @@ const App: React.FC = () => {
 
           <Route path="show-license" element={<ShowLicensePage />} />
           <Route path="show-changelog" element={<ShowChangelogPage />} />
+          <Route path="privacy-policy" element={<PrivacyPolicy />}/>
 
           {/* Apps Routes */}
 

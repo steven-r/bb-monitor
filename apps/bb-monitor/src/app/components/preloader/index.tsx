@@ -10,7 +10,11 @@ const Preloader: FC = () => {
     useEffect(() => {
       fetch(environment.apiAddress)
         .then((r) => r.json())
-        .then(setMessage);
+        .then(setMessage)
+        .catch(err => {
+            console.log(err);
+            setMessage({message: ''});
+        });
     }, []);
   
     return (
