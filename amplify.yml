@@ -6,11 +6,11 @@ applications:
         prebuild:
           commands:
             - npm install -g nx
-            - yarn install
+            - npm install
         build:
           commands: 
             - npm install -g nx
-            - yarn build
+            - npm run build
       artifacts:
         baseDirectory: ../../dist/apps/bb-monitor
         files:
