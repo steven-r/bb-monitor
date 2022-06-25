@@ -11,7 +11,7 @@ applications:
             - npm install
         build:
           commands: 
-            - nx build bb-monitor --prod
+            - npm run build
       artifacts:
         baseDirectory: ../../dist/apps/bb-monitor
         files:
