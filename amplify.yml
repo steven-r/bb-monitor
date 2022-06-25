@@ -10,7 +10,9 @@ applications:
             - npm install -g nx
             - npm install
         build:
-          commands: 
+          commands:
+            - nvm install 16
+            - npm install -g nx
             - npm run build
       artifacts:
         baseDirectory: ../../dist/apps/bb-monitor
