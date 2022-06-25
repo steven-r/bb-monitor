@@ -7,9 +7,8 @@ applications:
           commands:
             - cd ../..
             - nvm install 16
-            - npm install --location=global nx
             - npm install
-            - npm run build
+            - npx nx build
       artifacts:
         baseDirectory: ../../dist/apps/bb-monitor
         files:
