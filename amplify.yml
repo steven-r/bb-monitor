@@ -3,16 +3,12 @@ applications:
   - appRoot: apps/bb-monitor
     frontend:
       phases:
-        prebuild:
+        build:
           commands:
             - cd ../..
             - nvm install 16
             - npm install -g nx
             - npm install
-        build:
-          commands:
-            - nvm install 16
-            - npm install -g nx
             - npm run build
       artifacts:
         baseDirectory: ../../dist/apps/bb-monitor
