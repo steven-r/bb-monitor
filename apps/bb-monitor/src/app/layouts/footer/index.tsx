@@ -16,15 +16,22 @@ const Footer: React.FC = () => {
     useEffect(() => {
       fetch(environment.apiAddress)
         .then((r) => r.json())
-        .then(setMessage);
+        .then(setMessage)
+        .catch(err => {
+            console.log(err);
+            setMessage({message: ''});
+        });
     }, []);
 
     return (
         <StyledFooter>
             <StyledFooterRight>
                 <StyledFooterNav>
-                    <StyledFotterNavLink path="/show-license">
+                <StyledFotterNavLink path="/show-license">
                         License
+                    </StyledFotterNavLink>
+                    <StyledFotterNavLink path="/privacy-policy">
+                        Privacy Policy
                     </StyledFotterNavLink>
                     <StyledFotterNavLink path="/show-changelog">
                         Change Log
