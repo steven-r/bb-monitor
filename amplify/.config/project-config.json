@@ -8,10 +8,10 @@
   "javascript": {
     "framework": "react",
     "config": {
-      "SourceDir": "apps/bb-monitor",
-      "DistributionDir": "dist/apps/bb-monitor",
-      "BuildCommand": "npm run build",
-      "StartCommand": "npm run start"
+      "SourceDir": "src",
+      "DistributionDir": "build",
+      "BuildCommand": "npm run-script build",
+      "StartCommand": "npm run-script start"
     }
   }
 }
