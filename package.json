@@ -51,6 +51,8 @@
     ]
   },
   "devDependencies": {
-    "@types/react-gravatar": "^2.6.10"
+    "@commitlint/config-conventional": "^17.0.3",
+    "@types/react-gravatar": "^2.6.10",
+    "commitlint": "^17.0.3"
   }
 }
