@@ -1,6 +1,7 @@
 version: 1
 applications:
-  - frontend:
+  - appRoot: src/
+    frontend:
       phases:
         prebuild:
           commands:
