@@ -1,6 +1,6 @@
 version: 1
 applications:
-  - appRoot: src/
+  - appRoot: ./
     frontend:
       phases:
         prebuild:
@@ -8,7 +8,7 @@ applications:
             - yarn install
         build:
           commands: 
-            - npm build
+            - yarn build
       artifacts:
         baseDirectory: build
         files:
