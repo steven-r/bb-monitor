@@ -1,5 +1,0 @@
-type UserData @model @auth(rules: [{allow: public}, {allow: owner, operations: [create, read, update]}, {allow: groups, groups: ["Admins"], operations: [read, create, update, delete]}]) {
-  id: ID!
-  APIKey: String
-  userId: String
-}
