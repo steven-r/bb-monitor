@@ -1,6 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useMeasure } from 'react-use';
-import Popovers from '../../components/bootstrap/Popovers';
 
 const Footer = () => {
 	const [ref, { height }] = useMeasure<HTMLDivElement>();
@@ -13,16 +13,10 @@ const Footer = () => {
 			<div className='container-fluid'>
 				<div className='row'>
 					<div className='col'>
-						<Popovers title='Footer.js' desc={<code>src/layout/Footer/Footer.js</code>}>
-							Footer
-						</Popovers>
-						<code className='ps-3'>Footer.js</code>
+						Copyright &copy; {new Date().getFullYear()} Stephen Reindl
 					</div>
 					<div className='col-auto'>
-						<Popovers title='Footer.js' desc={<code>src/layout/Footer/Footer.js</code>}>
-							Footer
-						</Popovers>
-						<code className='ps-3'>Footer.js</code>
+						<Link to='/privacy-policy'>Privacy Policy</Link>
 					</div>
 				</div>
 			</div>

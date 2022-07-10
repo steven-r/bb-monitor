@@ -4,11 +4,11 @@ import Page from '../../../layout/Page/Page';
 import Humans from '../../../assets/img/scene4.png';
 import HumansWebp from '../../../assets/img/scene4.webp';
 import Button from '../../../components/bootstrap/Button';
-import { demoPages } from '../../../menu';
+import { authPages } from '../../../menu';
 
 const Page404 = () => {
 	return (
-		<PageWrapper title={demoPages.page404.text}>
+		<PageWrapper title={authPages.page404.text}>
 			<Page>
 				<div className='row d-flex align-items-center h-100'>
 					<div className='col-12 d-flex flex-column justify-content-center align-items-center'>

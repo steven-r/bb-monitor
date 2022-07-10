@@ -78,7 +78,7 @@ interface IItemProps {
 	hide?: boolean;
 	[key: string]: any;
 }
-export const Item: FC<IItemProps> = ({
+export const NavigationItem: FC<IItemProps> = ({
 	children,
 	to,
 	title,
@@ -297,7 +297,7 @@ export const Item: FC<IItemProps> = ({
 	// without submenu
 	return <li className='navigation-item'>{WITHOUT_CHILD}</li>;
 };
-Item.propTypes = {
+NavigationItem.propTypes = {
 	children: PropTypes.node,
 	to: PropTypes.string,
 	title: PropTypes.string,
@@ -310,7 +310,7 @@ Item.propTypes = {
 	isMore: PropTypes.bool,
 	hide: PropTypes.bool,
 };
-Item.defaultProps = {
+NavigationItem.defaultProps = {
 	children: null,
 	to: undefined,
 	title: undefined,
@@ -414,7 +414,7 @@ const Navigation = forwardRef<HTMLElement, INavigationProps>(
 		) {
 			return Object.keys(data).map((item) =>
 				data[item].path ? (
-					<Item
+					<NavigationItem
 						key={data[item].id}
 						rootId={rootId}
 						id={data[item].id}
@@ -435,7 +435,7 @@ const Navigation = forwardRef<HTMLElement, INavigationProps>(
 								isHorizontal,
 								undefined,
 							)}
-					</Item>
+					</NavigationItem>
 				) : (
 					!isMore &&
 					!isHorizontal && (
@@ -452,14 +452,14 @@ const Navigation = forwardRef<HTMLElement, INavigationProps>(
 				<List id={id} horizontal={horizontal}>
 					{fillMenu(menu, id, id, horizontal, undefined)}
 					{horizontal && (
-						<Item
+						<NavigationItem
 							rootId={`other-${id}`}
 							title={t('More')}
 							icon='MoreHoriz'
 							isHorizontal
 							isMore>
 							{fillMenu(menu, `other-${id}`, `other-${id}`, false, true)}
-						</Item>
+						</NavigationItem>
 					)}
 				</List>
 			</nav>

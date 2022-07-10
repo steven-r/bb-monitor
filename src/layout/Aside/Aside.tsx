@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import Brand from '../Brand/Brand';
 import Navigation, { NavigationLine } from '../Navigation/Navigation';
 import User from '../User/User';
-import { dashboardMenu, demoPages, layoutMenu } from '../../menu';
+import { dashboardMenu, authPages, layoutMenu } from '../../menu';
 import ThemeContext from '../../contexts/themeContext';
 
 import Icon from '../../components/icon/Icon';
@@ -47,7 +47,7 @@ const Aside = () => {
 					<NavigationLine />
 					{!doc && (
 						<>
-							<Navigation menu={demoPages} id='aside-demo-pages' />
+							<Navigation menu={authPages} id='aside-demo-pages' />
 							<NavigationLine />
 							<Navigation menu={layoutMenu} id='aside-menu' />
 							<NavigationLine />

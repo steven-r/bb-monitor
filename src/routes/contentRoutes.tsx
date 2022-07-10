@@ -1,10 +1,17 @@
 import React, { lazy } from 'react';
-import { dashboardMenu, demoPages, layoutMenu } from '../menu';
+import IsAuth from '../components/extras/IsAuth';
+import { dashboardMenu, authPages, layoutMenu } from '../menu';
 import Login from '../pages/presentation/auth/Login';
 
 const LANDING = {
+	WELCOME: lazy(() => import('../pages/landing/LandingPage')),
+	PRIVACY_POLICY: lazy(() => import('../pages/presentation/common/privacy-policy')),
+};
+
+const APP = {
 	DASHBOARD: lazy(() => import('../pages/dashboard/DashboardPage')),
 };
+
 const AUTH = {
 	PAGE_404: lazy(() => import('../pages/presentation/auth/Page404')),
 };
@@ -24,22 +31,29 @@ const presentation = [
 	 */
 	{
 		path: dashboardMenu.dashboard.path,
-		element: <LANDING.DASHBOARD />,
+		element: (
+			<IsAuth isAuthenticated={<APP.DASHBOARD />} isNotAuthenticated={<LANDING.WELCOME />} />
+		),
 		exact: true,
 	},
 	{
-		path: demoPages.page404.path,
+		path: authPages.page404.path,
 		element: <AUTH.PAGE_404 />,
 		exact: true,
 	},
 	{
-		path: demoPages.login.path,
+		path: authPages.login.path,
 		element: <Login />,
 		exact: true,
 	},
 	{
-		path: demoPages.signUp.path,
+		path: authPages.signUp.path,
 		element: <Login isSignUp />,
+		exact: true,
+	},
+	{
+		path: '/privacy-policy',
+		element: <LANDING.PRIVACY_POLICY />,
 		exact: true,
 	},
 

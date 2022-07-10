@@ -40,7 +40,7 @@ export const dashboardMenu = {
 	},
 };
 
-export const demoPages = {
+export const authPages = {
 	auth: {
 		id: 'auth',
 		text: 'Auth Pages',

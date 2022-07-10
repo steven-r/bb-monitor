@@ -13,6 +13,7 @@ import Dropdown, {
 import showNotification from '../../../components/extras/showNotification';
 import Icon from '../../../components/icon/Icon';
 import Spinner from '../../../components/bootstrap/Spinner';
+import EmailVerificationMissing from './EmailVerificationMissing';
 
 const DashboardHeader = () => {
 	const { darkModeStatus, setDarkModeStatus } = useDarkMode();
@@ -45,82 +46,85 @@ const DashboardHeader = () => {
 	});
 
 	return (
-		<Header>
-			<HeaderLeft>
-				<Popovers
-					title='DashboardHeader.js'
-					desc={<code>src/pages/common/Headers/DashboardHeader.js</code>}>
-					HeaderLeft
-				</Popovers>
-				<code>DashboardHeader.js</code>
-			</HeaderLeft>
+		<>
+			<Header>
+				<HeaderLeft>
+					<Popovers
+						title='DashboardHeader.js'
+						desc={<code>src/pages/common/Headers/DashboardHeader.js</code>}>
+						HeaderLeft
+					</Popovers>
+					<code>DashboardHeader.js</code>
+				</HeaderLeft>
 
-			<HeaderRight>
-				<div className='row g-3 align-items-center'>
-					<div className='col-auto'>
-						<Popovers
-							title='DashboardHeader.js'
-							desc={<code>src/pages/common/Headers/DashboardHeader.js</code>}>
-							HeaderRight
-						</Popovers>
-						<code className='ps-3'>DashboardHeader.js</code>
-					</div>
-					{/* Dark Mode */}
-					<div className='col-auto'>
-						<Popovers trigger='hover' desc='Dark / Light mode'>
-							<Button
-								// eslint-disable-next-line react/jsx-props-no-spreading
-								{...styledBtn}
-								icon={darkModeStatus ? 'DarkMode' : 'LightMode'}
-								onClick={() => setDarkModeStatus(!darkModeStatus)}
-								aria-label='Toggle fullscreen'
-								data-tour='dark-mode'
-							/>
-						</Popovers>
-					</div>
-					{/* Lang Selector */}
-					<div className='col-auto'>
-						<Dropdown>
-							<DropdownToggle hasIcon={false}>
-								{typeof getLangWithKey(i18n.language as ILang['key']['lng'])
-									?.icon === 'undefined' ? (
-									<Button
-										// eslint-disable-next-line react/jsx-props-no-spreading
-										{...styledBtn}
-										className='btn-only-icon'
-										aria-label='Change language'
-										data-tour='lang-selector'>
-										<Spinner isSmall inButton='onlyIcon' isGrow />
-									</Button>
-								) : (
-									<Button
-										// eslint-disable-next-line react/jsx-props-no-spreading
-										{...styledBtn}
-										icon={
-											getLangWithKey(i18n.language as ILang['key']['lng'])
-												?.icon
-										}
-										aria-label='Change language'
-										data-tour='lang-selector'
-									/>
-								)}
-							</DropdownToggle>
-							<DropdownMenu isAlignmentEnd data-tour='lang-selector-menu'>
-								{Object.keys(LANG).map((i) => (
-									<DropdownItem key={LANG[i].lng}>
+				<HeaderRight>
+					<div className='row g-3 align-items-center'>
+						<div className='col-auto'>
+							<Popovers
+								title='DashboardHeader.js'
+								desc={<code>src/pages/common/Headers/DashboardHeader.js</code>}>
+								HeaderRight
+							</Popovers>
+							<code className='ps-3'>DashboardHeader.js</code>
+						</div>
+						{/* Dark Mode */}
+						<div className='col-auto'>
+							<Popovers trigger='hover' desc='Dark / Light mode'>
+								<Button
+									// eslint-disable-next-line react/jsx-props-no-spreading
+									{...styledBtn}
+									icon={darkModeStatus ? 'DarkMode' : 'LightMode'}
+									onClick={() => setDarkModeStatus(!darkModeStatus)}
+									aria-label='Toggle fullscreen'
+									data-tour='dark-mode'
+								/>
+							</Popovers>
+						</div>
+						{/* Lang Selector */}
+						<div className='col-auto'>
+							<Dropdown>
+								<DropdownToggle hasIcon={false}>
+									{typeof getLangWithKey(i18n.language as ILang['key']['lng'])
+										?.icon === 'undefined' ? (
 										<Button
-											icon={LANG[i].icon}
-											onClick={() => changeLanguage(LANG[i].lng)}>
-											{LANG[i].text}
+											// eslint-disable-next-line react/jsx-props-no-spreading
+											{...styledBtn}
+											className='btn-only-icon'
+											aria-label='Change language'
+											data-tour='lang-selector'>
+											<Spinner isSmall inButton='onlyIcon' isGrow />
 										</Button>
-									</DropdownItem>
-								))}
-							</DropdownMenu>
-						</Dropdown>
+									) : (
+										<Button
+											// eslint-disable-next-line react/jsx-props-no-spreading
+											{...styledBtn}
+											icon={
+												getLangWithKey(i18n.language as ILang['key']['lng'])
+													?.icon
+											}
+											aria-label='Change language'
+											data-tour='lang-selector'
+										/>
+									)}
+								</DropdownToggle>
+								<DropdownMenu isAlignmentEnd data-tour='lang-selector-menu'>
+									{Object.keys(LANG).map((i) => (
+										<DropdownItem key={LANG[i].lng}>
+											<Button
+												icon={LANG[i].icon}
+												onClick={() => changeLanguage(LANG[i].lng)}>
+												{LANG[i].text}
+											</Button>
+										</DropdownItem>
+									))}
+								</DropdownMenu>
+							</Dropdown>
+						</div>
 					</div>
-				</div>
-			</HeaderRight>
-		</Header>
+				</HeaderRight>
+			</Header>
+			<EmailVerificationMissing />
+		</>
 	);
 };
 
